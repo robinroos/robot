@@ -46,4 +46,80 @@ public class OrientationTest {
         assertEquals(W, after.orientation);
     }
 
+    @Test
+    public void rightWhenOrientatedNorth() {
+        RobotPosition before = new RobotPosition(1, 1, N);
+        RobotPosition after = before.right();
+        assertEquals(1, after.x);
+        assertEquals(1, after.y);
+        assertEquals(E, after.orientation);
+    }
+
+    @Test
+    public void leftWhenOrientatedNorth() {
+        RobotPosition before = new RobotPosition(1, 1, N);
+        RobotPosition after = before.left();
+        assertEquals(1, after.x);
+        assertEquals(1, after.y);
+        assertEquals(W, after.orientation);
+    }
+
+
+    @Test
+    public void rightWhenOrientatedSouth() {
+        RobotPosition before = new RobotPosition(1, 1, S);
+        RobotPosition after = before.right();
+        assertEquals(1, after.x);
+        assertEquals(1, after.y);
+        assertEquals(W, after.orientation);
+    }
+
+    @Test
+    public void leftWhenOrientatedSouth() {
+        RobotPosition before = new RobotPosition(1, 1, S);
+        RobotPosition after = before.left();
+        assertEquals(1, after.x);
+        assertEquals(1, after.y);
+        assertEquals(E, after.orientation);
+    }
+
+
+    @Test
+    public void rightWhenOrientatedEast() {
+        RobotPosition before = new RobotPosition(1, 1, E);
+        RobotPosition after = before.right();
+        assertEquals(1, after.x);
+        assertEquals(1, after.y);
+        assertEquals(S, after.orientation);
+    }
+
+    @Test
+    public void leftWhenOrientatedEast() {
+        RobotPosition before = new RobotPosition(1, 1, E);
+        RobotPosition after = before.left();
+        assertEquals(1, after.x);
+        assertEquals(1, after.y);
+        assertEquals(N, after.orientation);
+    }
+
+
+    @Test
+    public void rightWhenOrientatedWest() {
+        RobotPosition before = new RobotPosition(1, 1, W);
+        RobotPosition after = before.right();
+        assertEquals(1, after.x);
+        assertEquals(1, after.y);
+        assertEquals(N, after.orientation);
+    }
+
+    @Test
+    public void leftWhenOrientatedWest() {
+        RobotPosition before = new RobotPosition(1, 1, W);
+        RobotPosition after = before.left();
+        assertEquals(1, after.x);
+        assertEquals(1, after.y);
+        assertEquals(S, after.orientation);
+    }
+
+
 }
