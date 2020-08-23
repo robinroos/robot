@@ -5,7 +5,7 @@ package uk.co.suboctave.robot.domain;
  * By modelling active as a boolean property we can later add other active/inactive states
  */
 public enum RobotStatus {
-    ACTIVE(true),
+    OK(true),
     LOST(false);
 
     private boolean active;
