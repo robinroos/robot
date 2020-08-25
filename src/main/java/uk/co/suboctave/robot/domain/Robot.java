@@ -82,5 +82,6 @@ public class Robot implements IRobot {
         if (status == LOST) {
             writer.print(" LOST");
         }
+        writer.println();
     }
 }

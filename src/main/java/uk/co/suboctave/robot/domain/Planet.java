@@ -33,7 +33,7 @@ public class Planet implements IPlanet {
      * @param orientation
      * @return
      */
-    IRobot buildRobot(int x, int y, Orientation orientation) {
+    public IRobot buildRobot(int x, int y, Orientation orientation) {
         RobotPosition startPosition = new RobotPosition(x, y, orientation);
         if (isValid(startPosition)) {
             return new Robot(this, new RobotPosition(x, y, orientation));

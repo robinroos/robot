@@ -64,11 +64,11 @@ public class PlanetTest {
         assertEquals(robot.getPosition(), new RobotPosition(1, 4, N));
         // robot is no longer active (it is lost)
         assertFalse(robot.isActive());
-        // test the robot's report() to get coverage over one that is LOST
+        // leverage this test to constrain the robot's report() method, to get coverage over one that is LOST
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         robot.report(pw);
-        assertEquals("1 4 N LOST", sw.toString());
+        assertEquals("1 4 N LOST\n", sw.toString());
     }
 
     @Test
