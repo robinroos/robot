@@ -17,13 +17,13 @@ public class PlanetTest {
 
     @Test
     public void robotFactoryForValidPosition() {
-        Robot robot = planet.buildRobot(2, 2, Orientation.N);
+        IRobot robot = planet.buildRobot(2, 2, Orientation.N);
         RobotPosition p = robot.getPosition();
     }
 
     @Test(expected = PlanetException.class)
     public void robotFactoryForInvalidPosition() {
-        Robot robot = planet.buildRobot(6, 6, Orientation.N);
+        IRobot robot = planet.buildRobot(6, 6, Orientation.N);
     }
 
     @Test

@@ -1,5 +1,7 @@
 package uk.co.suboctave.robot.domain;
 
+import java.util.Objects;
+
 /**
  * RobotPosition, comprising x and y co-ordinates and orientation.
  * Modelled as immutable - attributes are public final, and mutating actions result in a new RobotPosition instance.
@@ -39,5 +41,20 @@ public class RobotPosition {
      */
     public RobotPosition left() {
         return orientation.left(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RobotPosition that = (RobotPosition) o;
+        return x == that.x &&
+                y == that.y &&
+                orientation == that.orientation;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, orientation);
     }
 }

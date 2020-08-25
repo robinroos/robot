@@ -32,7 +32,7 @@ public class Planet {
      * @param orientation
      * @return
      */
-    Robot buildRobot(int x, int y, Orientation orientation) {
+    IRobot buildRobot(int x, int y, Orientation orientation) {
         RobotPosition startPosition = new RobotPosition(x, y, orientation);
         if (isValid(startPosition)) {
             return new Robot(this, new RobotPosition(x, y, orientation));
