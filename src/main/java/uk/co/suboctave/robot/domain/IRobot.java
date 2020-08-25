@@ -1,5 +1,7 @@
 package uk.co.suboctave.robot.domain;
 
+import java.io.PrintWriter;
+
 public interface IRobot {
     /**
      * Evaluates true if robot remains active (has not been lost)
@@ -27,4 +29,9 @@ public interface IRobot {
      * Instruct the Robot to move Forward
      */
     void forward();
+
+    /**
+     * Write position to a PrintWriter
+     */
+    void report(PrintWriter writer);
 }

@@ -4,6 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import uk.co.suboctave.robot.exception.PlanetException;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import static org.junit.Assert.*;
 import static uk.co.suboctave.robot.domain.Orientation.N;
 
@@ -61,6 +64,11 @@ public class PlanetTest {
         assertEquals(robot.getPosition(), new RobotPosition(1, 4, N));
         // robot is no longer active (it is lost)
         assertFalse(robot.isActive());
+        // test the robot's report() to get coverage over one that is LOST
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        robot.report(pw);
+        assertEquals("1 4 N LOST", sw.toString());
     }
 
     @Test

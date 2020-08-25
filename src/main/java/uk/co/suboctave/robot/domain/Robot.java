@@ -3,6 +3,8 @@ package uk.co.suboctave.robot.domain;
 
 import uk.co.suboctave.robot.exception.RobotLostException;
 
+import java.io.PrintWriter;
+
 import static uk.co.suboctave.robot.domain.RobotStatus.LOST;
 import static uk.co.suboctave.robot.domain.RobotStatus.OK;
 
@@ -71,6 +73,14 @@ public class Robot implements IRobot {
         }
         catch (RobotLostException e) {
             status = LOST;
+        }
+    }
+
+    @Override
+    public void report(PrintWriter writer) {
+        writer.print(String.format("%s %s %s", position.x, position.y, position.orientation));
+        if (status == LOST) {
+            writer.print(" LOST");
         }
     }
 }

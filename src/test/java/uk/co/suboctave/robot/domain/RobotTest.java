@@ -8,6 +8,9 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
@@ -41,6 +44,17 @@ public class RobotTest {
         IRobot r = p.buildRobot(1, 1, Orientation.N);
         r.forward();
         assertEquals(r.getPosition(), new RobotPosition(1, 2, Orientation.N));
+    }
+
+    @Test
+    public void report() {
+        Planet p = new Planet("Mars", 3, 4);
+        IRobot r = p.buildRobot(1, 2, Orientation.N);
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        r.report(pw);
+        assertEquals("1 2 N", sw.toString());
+
     }
 
 }
