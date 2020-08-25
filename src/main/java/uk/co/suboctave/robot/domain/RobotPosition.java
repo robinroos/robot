@@ -57,4 +57,8 @@ public class RobotPosition {
     public int hashCode() {
         return Objects.hash(x, y, orientation);
     }
+
+    public String toString() {
+        return String.format("[%s,%s,%s]", x, y, orientation);
+    }
 }

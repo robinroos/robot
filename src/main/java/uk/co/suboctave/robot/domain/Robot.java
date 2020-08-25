@@ -1,6 +1,9 @@
 package uk.co.suboctave.robot.domain;
 
 
+import uk.co.suboctave.robot.exception.RobotLostException;
+
+import static uk.co.suboctave.robot.domain.RobotStatus.LOST;
 import static uk.co.suboctave.robot.domain.RobotStatus.OK;
 
 /**
@@ -9,13 +12,13 @@ import static uk.co.suboctave.robot.domain.RobotStatus.OK;
 public class Robot implements IRobot {
     private RobotPosition position;
     private RobotStatus status = OK;
-    private Planet planet;
+    private IPlanet planet;
 
     /**
      * Non-public constructor: use Planet to make instances of Robot
      * @param position
      */
-    Robot(Planet planet, RobotPosition position) {
+    Robot(IPlanet planet, RobotPosition position) {
         this.planet = planet;
         this.position = position;
     }
@@ -59,17 +62,15 @@ public class Robot implements IRobot {
     }
 
     /**
-     * Move forward by having the current position generate the new position.
-     * Simplistic implementation with no Scent processing.
+     * Move forward by having the planet generate the new position.
      */
     @Override
     public void forward() {
-        // TODO execute this through Planet to get Scent processing
-        if (isActive()) {
-            RobotPosition candidate = position.forward();
-            if (planet.isValid(candidate)) {
-                position = candidate;
-            }
+        try {
+            position = planet.forward(this);
+        }
+        catch (RobotLostException e) {
+            status = LOST;
         }
     }
 }

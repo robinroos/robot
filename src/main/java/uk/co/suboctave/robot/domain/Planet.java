@@ -1,6 +1,7 @@
 package uk.co.suboctave.robot.domain;
 
 import uk.co.suboctave.robot.exception.PlanetException;
+import uk.co.suboctave.robot.exception.RobotLostException;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +10,7 @@ import java.util.Set;
  * Models a planet, as a named grid with maximum x/y co-ordinates, history of scent positions.
  * Planet acts as a Robot factory and can validate positions
  */
-public class Planet {
+public class Planet implements IPlanet {
     private String name;
     private int upperRightX;
     private int upperRightY;
@@ -51,4 +52,39 @@ public class Planet {
         return (position.x >= 0 && position.y >= 0 && position.x <= upperRightX && position.y <= upperRightY);
     }
 
+
+    @Override
+    public RobotPosition forward(IRobot robot) {
+        RobotPosition positionBeforeMove = robot.getPosition();
+        if (robot.isActive()) {
+            if (isValid(positionBeforeMove)) {
+                if (scents.contains(positionBeforeMove)) {
+                    // it is not safe to move forward as a Robot was recorded as having previously been Lost from here
+                    return positionBeforeMove;
+                }
+                else {
+                    RobotPosition positionAfterMove = positionBeforeMove.forward();
+                    if (isValid(positionAfterMove)) {
+                        return positionAfterMove;
+                    } else {
+                        // after move, Robot is lost
+
+                        // record the position from which it moved
+                        scents.add(positionBeforeMove);
+
+                        // throw exception back to the caller
+                        throw new RobotLostException("Robot has been lost after moving forward from: " + positionBeforeMove);
+                    }
+                }
+            }
+            else {
+                // this is an exception case - the Robot is supposedly not lost but its CURRENT position is invalid.
+                throw new PlanetException("Position from which to move forward is invalid");
+            }
+        }
+        else {
+            // Robot is not active - do not move
+            return positionBeforeMove;
+        }
+    }
 }
